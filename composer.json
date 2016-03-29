@@ -1,0 +1,49 @@
+{
+  "name": "neomerx/limoncello-illuminate",
+  "description": "JSON API sample for Laravel and Lumen",
+  "keywords": [
+    "JSON API",
+    "JSON",
+    "API",
+    "Laravel",
+    "Lumen",
+    "neomerx"
+  ],
+  "homepage": "https://github.com/neomerx/limoncello-illuminate",
+  "support": {
+    "issues": "https://github.com/neomerx/limoncello-illuminate/issues"
+  },
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "neomerx",
+      "email": "info@neomerx.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.9",
+    "laravel/lumen-framework": "5.2.*",
+    "neomerx/cors-illuminate": "^1.0",
+    "neomerx/json-api": "dev-master",
+    "neomerx/limoncello": "dev-develop"
+  },
+  "require-dev": {
+    "mockery/mockery": "0.9.*",
+    "fzaninotto/faker": "~1.4",
+    "squizlabs/php_codesniffer": "~2.0",
+    "phpmd/phpmd" : "@stable",
+    "phpunit/phpunit": "~4.0"
+  },
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "Neomerx\\LimoncelloIlluminate\\": "app/",
+      "Neomerx\\Tests\\LimoncelloIlluminate\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": ["@test-cs", "@test-md"],
+    "test-cs": "./vendor/bin/phpcs -p -s --standard=PSR2 ./app ./tests",
+    "test-md": "./vendor/bin/phpmd ./app text codesize,controversial,cleancode,design,unusedcode,naming"
+  }
+}
