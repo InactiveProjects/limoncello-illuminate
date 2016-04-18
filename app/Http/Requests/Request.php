@@ -20,7 +20,7 @@ abstract class Request extends JsonApiRequest
     {
         $parentRules = parent::getParameterRules();
         $rules       = [
-            self::RULE_ALLOWED_PAGING_PARAMS => [
+                self::RULE_ALLOWED_PAGING_PARAMS => [
                 self::PARAM_PAGING_SIZE,
                 self::PARAM_PAGING_NUMBER,
             ],
