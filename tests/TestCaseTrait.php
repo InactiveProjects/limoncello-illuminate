@@ -3,7 +3,7 @@
 use Illuminate\Http\Response;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 use Neomerx\JsonApi\Contracts\Http\Headers\MediaTypeInterface;
-use Neomerx\JsonApi\Contracts\Http\Parameters\ParametersParserInterface;
+use Neomerx\JsonApi\Contracts\Http\Query\QueryParametersParserInterface;
 use Neomerx\LimoncelloIlluminate\Authentication\TokenCodec;
 use Neomerx\LimoncelloIlluminate\Database\Models\Role;
 use Neomerx\LimoncelloIlluminate\Database\Models\User;
@@ -107,7 +107,7 @@ trait TestCaseTrait
     protected function getPageParams($number, $size)
     {
         return [
-            ParametersParserInterface::PARAM_PAGE => [
+            QueryParametersParserInterface::PARAM_PAGE => [
                 Request::PARAM_PAGING_SIZE   => $size,
                 Request::PARAM_PAGING_NUMBER => $number,
             ],
@@ -123,7 +123,7 @@ trait TestCaseTrait
     {
         $pathsList = implode(',', $paths);
         return [
-            ParametersParserInterface::PARAM_INCLUDE => $pathsList,
+            QueryParametersParserInterface::PARAM_INCLUDE => $pathsList,
         ];
     }
 

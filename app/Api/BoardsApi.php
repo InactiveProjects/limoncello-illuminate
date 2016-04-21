@@ -1,6 +1,6 @@
 <?php namespace Neomerx\LimoncelloIlluminate\Api;
 
-use Neomerx\JsonApi\Contracts\Http\Parameters\ParametersInterface;
+use Neomerx\JsonApi\Contracts\Encoder\Parameters\EncodingParametersInterface;
 use Neomerx\Limoncello\Contracts\JsonApi\PagedDataInterface;
 use Neomerx\Limoncello\Http\JsonApiRequest;
 use Neomerx\LimoncelloIlluminate\Api\Authorizations\BoardsAuthorizations;
@@ -27,7 +27,7 @@ class BoardsApi extends Crud
     /**
      * @inheritdoc
      */
-    public function index(ParametersInterface $parameters = null, array $relations = [])
+    public function index(EncodingParametersInterface $parameters = null, array $relations = [])
     {
         $relations = [
             Board::REL_POSTS,
@@ -63,12 +63,12 @@ class BoardsApi extends Crud
     }
 
     /**
-     * @param int|string          $boardId
-     * @param ParametersInterface $parameters
+     * @param int|string                  $boardId
+     * @param EncodingParametersInterface $parameters
      *
      * @return PagedDataInterface
      */
-    public function indexPosts($boardId, ParametersInterface $parameters)
+    public function indexPosts($boardId, EncodingParametersInterface $parameters)
     {
         $this->getLogger()->debug('Index board posts started.', [Board::FIELD_ID => $boardId]);
 

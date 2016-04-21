@@ -1,7 +1,7 @@
 <?php namespace Neomerx\LimoncelloIlluminate\Api;
 
 use Illuminate\Database\Eloquent\Model;
-use Neomerx\JsonApi\Contracts\Http\Parameters\ParametersInterface;
+use Neomerx\JsonApi\Contracts\Encoder\Parameters\EncodingParametersInterface;
 use Neomerx\Limoncello\Contracts\JsonApi\PagedDataInterface;
 use Neomerx\Limoncello\Errors\ErrorCollection;
 use Neomerx\Limoncello\Http\JsonApiRequest;
@@ -34,7 +34,7 @@ class PostsApi extends Crud
     /**
      * @inheritdoc
      */
-    public function index(ParametersInterface $parameters = null, array $relations = [])
+    public function index(EncodingParametersInterface $parameters = null, array $relations = [])
     {
         $relations = [
             Post::REL_USER,
@@ -72,12 +72,12 @@ class PostsApi extends Crud
     }
 
     /**
-     * @param int|string          $postId
-     * @param ParametersInterface $parameters
+     * @param int|string                  $postId
+     * @param EncodingParametersInterface $parameters
      *
      * @return PagedDataInterface
      */
-    public function indexComments($postId, ParametersInterface $parameters)
+    public function indexComments($postId, EncodingParametersInterface $parameters)
     {
         $this->getLogger()->debug('Index post comments started.', [Post::FIELD_ID => $postId]);
 

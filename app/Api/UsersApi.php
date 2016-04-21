@@ -2,7 +2,7 @@
 
 use Closure;
 use Illuminate\Database\Eloquent\Model;
-use Neomerx\JsonApi\Contracts\Http\Parameters\ParametersInterface;
+use Neomerx\JsonApi\Contracts\Encoder\Parameters\EncodingParametersInterface;
 use Neomerx\Limoncello\Contracts\JsonApi\PagedDataInterface;
 use Neomerx\Limoncello\Errors\ErrorCollection;
 use Neomerx\Limoncello\JsonApi\Schema;
@@ -29,7 +29,7 @@ class UsersApi extends Crud
     /**
      * @inheritdoc
      */
-    public function index(ParametersInterface $parameters = null, array $relations = [])
+    public function index(EncodingParametersInterface $parameters = null, array $relations = [])
     {
         $relations = [
             User::REL_ROLE,
@@ -41,12 +41,12 @@ class UsersApi extends Crud
     }
 
     /**
-     * @param int|string          $userId
-     * @param ParametersInterface $parameters
+     * @param int|string                  $userId
+     * @param EncodingParametersInterface $parameters
      *
      * @return PagedDataInterface
      */
-    public function indexPosts($userId, ParametersInterface $parameters)
+    public function indexPosts($userId, EncodingParametersInterface $parameters)
     {
         $this->getLogger()->debug('Index user posts started.', [User::FIELD_ID => $userId]);
 
@@ -58,12 +58,12 @@ class UsersApi extends Crud
     }
 
     /**
-     * @param int|string          $userId
-     * @param ParametersInterface $parameters
+     * @param int|string                  $userId
+     * @param EncodingParametersInterface $parameters
      *
      * @return PagedDataInterface
      */
-    public function indexComments($userId, ParametersInterface $parameters)
+    public function indexComments($userId, EncodingParametersInterface $parameters)
     {
         $this->getLogger()->debug('Index user comments started.', [User::FIELD_ID => $userId]);
 

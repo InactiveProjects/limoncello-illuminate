@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request as IlluminateRequest;
 use Illuminate\Validation\Factory;
 use Illuminate\Validation\Validator;
-use Neomerx\JsonApi\Contracts\Http\Parameters\ParametersInterface;
+use Neomerx\JsonApi\Contracts\Encoder\Parameters\EncodingParametersInterface;
 use Neomerx\Limoncello\Api\Crud as BaseCrud;
 use Neomerx\Limoncello\Contracts\Api\CrudAuthorizationsInterface;
 use Neomerx\Limoncello\Contracts\Auth\AccountInterface;
@@ -53,7 +53,7 @@ abstract class Crud extends BaseCrud
     /**
      * @inheritdoc
      */
-    public function index(ParametersInterface $parameters = null, array $relations = [])
+    public function index(EncodingParametersInterface $parameters = null, array $relations = [])
     {
         $this->getLogger()->debug('Index resources started.');
 
@@ -81,7 +81,7 @@ abstract class Crud extends BaseCrud
     /**
      * @inheritdoc
      */
-    public function read($index, ParametersInterface $parameters = null, array $relations = [])
+    public function read($index, EncodingParametersInterface $parameters = null, array $relations = [])
     {
         $this->getLogger()->debug('Read resource started.');
 
@@ -133,19 +133,19 @@ abstract class Crud extends BaseCrud
      *
      * @return PagedDataInterface
      */
-    protected function readOnIndex(Builder $builder, ParametersInterface $parameters = null)
+    protected function readOnIndex(Builder $builder, EncodingParametersInterface $parameters = null)
     {
         return $this->paginateBuilder($builder, $parameters);
     }
 
     /**
-     * @param int|string          $resourceId
-     * @param string              $relationshipName
-     * @param ParametersInterface $parameters
+     * @param int|string                  $resourceId
+     * @param string                      $relationshipName
+     * @param EncodingParametersInterface $parameters
      *
      * @return PagedDataInterface
      */
-    public function indexRelationship($resourceId, $relationshipName, ParametersInterface $parameters)
+    public function indexRelationship($resourceId, $relationshipName, EncodingParametersInterface $parameters)
     {
         $resource = $this->read($resourceId);
 
@@ -160,12 +160,12 @@ abstract class Crud extends BaseCrud
     }
 
     /**
-     * @param Builder             $builder
-     * @param ParametersInterface $parameters
+     * @param Builder                     $builder
+     * @param EncodingParametersInterface $parameters
      *
      * @return PagedDataInterface
      */
-    protected function paginateBuilder(Builder $builder, ParametersInterface $parameters)
+    protected function paginateBuilder(Builder $builder, EncodingParametersInterface $parameters)
     {
         $pageSize   = $this->getPageSize($parameters);
         $pageNumber = $this->getPageNumber($parameters);
@@ -182,33 +182,33 @@ abstract class Crud extends BaseCrud
     }
 
     /**
-     * @param ParametersInterface|null $parameters
+     * @param EncodingParametersInterface|null $parameters
      *
      * @return int
      */
-    protected function getPageSize(ParametersInterface $parameters = null)
+    protected function getPageSize(EncodingParametersInterface $parameters = null)
     {
         return $this->getPagingParameter(Request::PARAM_PAGING_SIZE, static::MAX_PAGE_SIZE, $parameters);
     }
 
     /**
-     * @param ParametersInterface|null $parameters
+     * @param EncodingParametersInterface|null $parameters
      *
      * @return int|null
      */
-    protected function getPageNumber(ParametersInterface $parameters = null)
+    protected function getPageNumber(EncodingParametersInterface $parameters = null)
     {
         return $this->getPagingParameter(Request::PARAM_PAGING_NUMBER, null, $parameters);
     }
 
     /**
-     * @param string                   $key
-     * @param mixed                    $default
-     * @param ParametersInterface|null $parameters
+     * @param string                           $key
+     * @param mixed                            $default
+     * @param EncodingParametersInterface|null $parameters
      *
      * @return mixed
      */
-    protected function getPagingParameter($key, $default, ParametersInterface $parameters = null)
+    protected function getPagingParameter($key, $default, EncodingParametersInterface $parameters = null)
     {
         $value = $default;
         if ($parameters !== null) {
