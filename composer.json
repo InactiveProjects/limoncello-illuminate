@@ -23,8 +23,8 @@
   "require": {
     "php": ">=5.5.9",
     "laravel/lumen-framework": "5.2.*",
-    "neomerx/cors-illuminate": "^1.0",
-    "neomerx/json-api": "dev-master",
+    "neomerx/cors-illuminate": "^2.0",
+    "neomerx/json-api": "^0.8.0",
     "neomerx/limoncello": "dev-develop"
   },
   "require-dev": {
